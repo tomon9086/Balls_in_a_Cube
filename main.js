@@ -10,26 +10,55 @@ gr(function(){
 });
 
 const cubeSize = 5;
-const e = 0.5;
+const e = 0.8;
 var gravity = [0, -9.8, 0];
 var balls = [];
 
 physics();
 
 function physics(){
-	// physics
+	// balls.forEach(function(v, i){
+	// 	if(v.velocity[0] < 0.01){
+	// 		v.velocity[0] = 0;
+	// 	}
+	// 	if(v.velocity[1] < 0.01){
+	// 		v.velocity[1] = 0;
+	// 	}
+	// 	if(v.velocity[2] < 0.01){
+	// 		v.velocity[2] = 0;
+	// 	}
+	// });
 	balls.forEach(function(v, i){
-		if(v.dent){ return; }
-		if(v.coordinate[0] < -(cubeSize - v.radius)){ v.velocity[0] *= -1 * e; v.dent = true; }
-		if(v.coordinate[0] > (cubeSize - v.radius)){ v.velocity[0] *= -1 * e; v.dent = true; }
-		if(v.coordinate[1] < -(cubeSize - v.radius)){ v.velocity[1] *= -1 * e; v.dent = true; }
-		if(v.coordinate[1] > (cubeSize - v.radius)){ v.velocity[1] *= -1 * e; v.dent = true; }
-		if(v.coordinate[2] < -(cubeSize - v.radius)){ v.velocity[2] *= -1 * e; v.dent = true; }
-		if(v.coordinate[2] > (cubeSize - v.radius)){ v.velocity[2] *= -1 * e; v.dent = true; }
-		if(v.coordinate[0] > -(cubeSize - v.radius) && v.coordinate[0] < (cubeSize - v.radius) && v.coordinate[1] > -(cubeSize - v.radius) && v.coordinate[1] < (cubeSize - v.radius) && v.coordinate[2] > -(cubeSize - v.radius) && v.coordinate[2] < (cubeSize - v.radius)){ v.dent = false; }
+		// if(v.dent){ return; }
+		// v.noDent = true;
+		// v.coordinate.forEach(function(w, j){
+		// 	if(w + v.velocity[j] === (cubeSize - v.radius) || w + v.velocity[j] === -(cubeSize - v.radius)){
+		// 		v.velocity[j] *= -1 * e;
+		// 	}else if(w + v.velocity[j] > (cubeSize - v.radius) || w + v.velocity[j] < -(cubeSize - v.radius)){
+		// 		v.velocity[j] *= -1 * e;
+		// 		v.dent = true;
+		// 		v.noDent = false;
+		// 	}else{
+		// 		v.noDent = true;
+		// 	}
+		// });
+		// if(v.noDent){ v.dent = false; }
+		if(v.coordinate[0] + v.velocity[0] < -(cubeSize - v.radius)){ v.velocity[0] *= -1 * e; v.dent = true; }
+		if(v.coordinate[0] + v.velocity[0] > (cubeSize - v.radius)){ v.velocity[0] *= -1 * e; v.dent = true; }
+		if(v.coordinate[1] + v.velocity[1] < -(cubeSize - v.radius)){ v.velocity[1] *= -1 * e; v.dent = true; }
+		if(v.coordinate[1] + v.velocity[1] > (cubeSize - v.radius)){ v.velocity[1] *= -1 * e; v.dent = true; }
+		if(v.coordinate[2] + v.velocity[2] < -(cubeSize - v.radius)){ v.velocity[2] *= -1 * e; v.dent = true; }
+		if(v.coordinate[2] + v.velocity[2] > (cubeSize - v.radius)){ v.velocity[2] *= -1 * e; v.dent = true; }
+		if(v.coordinate[0] + v.velocity[0] > -(cubeSize - v.radius) && v.coordinate[0] + v.velocity[0] < (cubeSize - v.radius) && v.coordinate[1] + v.velocity[1] > -(cubeSize - v.radius) && v.coordinate[1] + v.velocity[1] < (cubeSize - v.radius) && v.coordinate[2] + v.velocity[2] > -(cubeSize - v.radius) && v.coordinate[2] + v.velocity[2] < (cubeSize - v.radius)){ v.dent = false; }
 	});
 	balls.forEach(function(v, i){
-		if(v.coordinate[1] >= -(cubeSize - v.radius)){
+		if(v.coordinate[0] >= -(cubeSize - v.radius)){
+			v.velocity = vectorVectorAddition(v.velocity, vectorScalarDivision(gravity, 1000));
+		}
+		if(v.coordinate[1] > -(cubeSize - v.radius)){
+			v.velocity = vectorVectorAddition(v.velocity, vectorScalarDivision(gravity, 1000));
+		}
+		if(v.coordinate[2] >= -(cubeSize - v.radius)){
 			v.velocity = vectorVectorAddition(v.velocity, vectorScalarDivision(gravity, 1000));
 		}
 		console.log(v.velocity, v.coordinate);
@@ -49,6 +78,7 @@ class Ball{
 		this.e = 1;
 		this.radius = 1;
 		this.dent = false;
+		this.noDent = true;
 	}
 	update(){
 		this.coordinate = vectorVectorAddition(this.coordinate, this.velocity);
@@ -98,6 +128,6 @@ function vectorMagnitude(vector){
 	var result = 0;
 	var sum = 0;
 	vector.forEach(function(v, i){
-
-	})
+		result = Math.sqrt();
+	});
 }
