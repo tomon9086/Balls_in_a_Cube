@@ -1,35 +1,87 @@
 gr(function(){
 	var $$ = gr("#main");
-	for(let i = 0; i < 3; i++){
-		balls[i] = new Ball();
-	}
-	// coordinate initialize
-	balls.forEach(function(v, i){
-		v.coordinate[i] = 3;
-	});
 });
 
+var world = new CANNON.World();
+world.gravity.set(0, -9.82, 0);
 
-physics();
+var planes = [];
+for(let i = 0; i < 6; i++){
+	planes[i] = new CANNON.Body({
+	    mass: 0, // mass == 0 makes the body static
+	});
+	var planeShape = new CANNON.Plane();
+	planes[i].addShape(planeShape);
+}
+planes.forEach(function(v, i){
+	switch(i){
+		case 0:
+			v.position = new CANNON.Vec3(5, 0, 0);
+			v.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 1, 0), -Math.PI / 2);
+			break;
+		case 1:
+			v.position = new CANNON.Vec3(-5, 0, 0);
+			v.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 1, 0), Math.PI / 2);
+			break;
+		case 2:
+			v.position = new CANNON.Vec3(0, 5, 0);
+			v.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), Math.PI / 2);
+			break;
+		case 3:
+			v.position = new CANNON.Vec3(0, -5, 0);
+			v.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2);
+			break;
+		case 4:
+			v.position = new CANNON.Vec3(0, 0, 5);
+			v.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), Math.PI);
+			break;
+		case 5:
+			v.position = new CANNON.Vec3(0, 0, -5);
+			break;
+	}
+	world.addBody(v);
+});
 
-function physics(){
-	
-
-	requestAnimationFrame(physics);
+var balls = [];
+for(let i = 0; i < 3; i++){
+	var radius = 1;
+	balls[i] = new CANNON.Body({
+	   mass: 1.2,
+	   position: new CANNON.Vec3(0, 0, 0),
+	   shape: new CANNON.Sphere(radius),
+	});
+	switch(i){
+		case 0:
+			balls[i].position = new CANNON.Vec3(3, 0, 0);
+			break;
+		case 1:
+			balls[i].position = new CANNON.Vec3(0, 3, 0);
+			break;
+		case 2:
+			balls[i].position = new CANNON.Vec3(0, 0, 3);
+			break;
+	}
+	world.addBody(balls[i]);
 }
 
-class Ball{
-	constructor(){
-		// [x, y, z]
-		this.coordinate = [0, 0, 0];
-		this.velocity = [0, 0, 0];
-		this.mass = 1;
-		this.e = 1;
-		this.radius = 1;
-		this.dent = false;
-		this.noDent = true;
+var fixedTimeStep = 1.0 / 60.0; // seconds
+var maxSubSteps = 3;
+
+var lastTime;
+physics();
+
+function physics(time){
+	if(lastTime !== undefined){
+		var dt = (time - lastTime) / 1000;
+		world.step(fixedTimeStep, dt, maxSubSteps);
 	}
-	update(){
-		this.coordinate = vectorVectorAddition(this.coordinate, this.velocity);
-	}
+	balls.forEach(function(v, i){
+		gr("#main")("#sphere" + i).setAttribute("position", v.position.x + "," + v.position.y + "," + v.position.z);
+	});
+	lastTime = time;
+
+	// console.log(gr("#main")("#camera").getAttribute("rotation"));
+	// world.gravity.set(0, 0, 0);
+
+	requestAnimationFrame(physics);
 }
