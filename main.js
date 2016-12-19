@@ -1,6 +1,5 @@
 gr(function(){
 	var $$ = gr("#main");
-});
 
 var world = new CANNON.World();
 world.gravity.set(0, -9.82, 0);
@@ -85,3 +84,4 @@ function physics(time){
 
 	requestAnimationFrame(physics);
 }
+	});
