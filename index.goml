@@ -1,5 +1,6 @@
 <goml height="fit">
     <geometry type="sphere" name="sphere" divHorizontal="20" divVertical="20"/>
+    <!-- <geometry name="cylinder" type="cylinder" /> -->
 	<scene>
         <camera id="camera" class="camera" near="0.01" far="400.0" aspect="1.5" position="0,0,20" rotation="0,0,0">
             <camera.components>
@@ -11,5 +12,9 @@
         <mesh id="sphere0" geometry="sphere" color="#FF0000" targetBuffer="wireframe" scale="1,1,1" position="3,0,0" rotation="0,0,0"></mesh>
         <mesh id="sphere1" geometry="sphere" color="#00FF00" targetBuffer="wireframe" scale="1,1,1" position="0,3,0" rotation="0,0,0"></mesh>
         <mesh id="sphere2" geometry="sphere" color="#0000FF" targetBuffer="wireframe" scale="1,1,1" position="0,0,3" rotation="0,0,0"></mesh>
+
+        <!-- <mesh id="cylinder" geometry="cylinder" color="#000000" scale="0.1,1,0.1" position="0,0,0" rotation="0,0,0" targetBuffer="wireframe"></mesh> -->
+        <mesh id="origin" geometry="sphere" color="#000000" scale="0.2,0.2,0.2" position="0,0,0" rotation="0,0,0"></mesh>
+        <mesh id="gravityDisplay" geometry="sphere" color="#FF0000" scale="0.2,0.2,0.2" position="0,0,0" rotation="0,0,0"></mesh>
     </scene>
 </goml>
