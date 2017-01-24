@@ -85,74 +85,10 @@ gr(function(){
 		});
 		lastTime = time;
 
-		// console.log(gr("#main")("#camera").getAttribute("rotation").eularAngles.rawElements);
 		var camera = gr("#main")("#camera").get(0);
 		var t =camera.getComponent("Transform");
 		var d = t.up.negateThis().multiplyWith(9.82);
-		// cameraEularAngles[1] += 0.5 * Math.PI;
-		if(d){
-
-			// console.log(lastCameraEularAngles);
-			// debugger;
-
-			// =========== Eular angles ===========
-			// var angleMatrix = [
-			// 	[Math.cos(cameraEularAngles[0]) * Math.cos(cameraEularAngles[1]) * Math.cos(cameraEularAngles[2]) - Math.sin(cameraEularAngles[0]) * Math.sin(cameraEularAngles[2]), -Math.cos(cameraEularAngles[0]) * Math.cos(cameraEularAngles[1]) * Math.sin(cameraEularAngles[2]) - Math.sin(cameraEularAngles[0]) * Math.cos(cameraEularAngles[2]), Math.cos(cameraEularAngles[0]) * Math.sin(cameraEularAngles[1]), 0],
-			// 	[Math.sin(cameraEularAngles[0]) * Math.cos(cameraEularAngles[1]) * Math.cos(cameraEularAngles[2]) + Math.cos(cameraEularAngles[0]) * Math.sin(cameraEularAngles[2]), -Math.sin(cameraEularAngles[0]) * Math.cos(cameraEularAngles[1]) * Math.sin(cameraEularAngles[2]) + Math.cos(cameraEularAngles[0]) * Math.cos(cameraEularAngles[2]), Math.sin(cameraEularAngles[0]) * Math.sin(cameraEularAngles[1]), 0],
-			// 	[-Math.sin(cameraEularAngles[1]) * Math.cos(cameraEularAngles[2]), Math.sin(cameraEularAngles[1]) * Math.sin(cameraEularAngles[2]), Math.cos(cameraEularAngles[1]), 0],
-			// 	[0, 0, 0, 1]];
-
-			// x ↔ y
-			// var angleMatrix = [
-			// 	[Math.cos(cameraEularAngles[1]) * Math.cos(cameraEularAngles[0]) * Math.cos(cameraEularAngles[2]) - Math.sin(cameraEularAngles[1]) * Math.sin(cameraEularAngles[2]), -Math.cos(cameraEularAngles[1]) * Math.cos(cameraEularAngles[0]) * Math.sin(cameraEularAngles[2]) - Math.sin(cameraEularAngles[1]) * Math.cos(cameraEularAngles[2]), Math.cos(cameraEularAngles[1]) * Math.sin(cameraEularAngles[0]), 0],
-			// 	[Math.sin(cameraEularAngles[1]) * Math.cos(cameraEularAngles[0]) * Math.cos(cameraEularAngles[2]) + Math.cos(cameraEularAngles[1]) * Math.sin(cameraEularAngles[2]), -Math.sin(cameraEularAngles[1]) * Math.cos(cameraEularAngles[0]) * Math.sin(cameraEularAngles[2]) + Math.cos(cameraEularAngles[1]) * Math.cos(cameraEularAngles[2]), Math.sin(cameraEularAngles[1]) * Math.sin(cameraEularAngles[0]), 0],
-			// 	[-Math.sin(cameraEularAngles[0]) * Math.cos(cameraEularAngles[2]), Math.sin(cameraEularAngles[0]) * Math.sin(cameraEularAngles[2]), Math.cos(cameraEularAngles[0]), 0],
-			// 	[0, 0, 0, 1]];
-
-
-			// =========== RollPitchYoe ===========
-			// var angleMatrix = [
-			// 	[Math.cos(cameraEularAngles[2]) * Math.cos(cameraEularAngles[0]), Math.cos(cameraEularAngles[2]) * Math.sin(cameraEularAngles[0]) * Math.sin(cameraEularAngles[1]) - Math.sin(cameraEularAngles[2]) * Math.cos(cameraEularAngles[1]), Math.cos(cameraEularAngles[2]) * Math.sin(cameraEularAngles[0]) * Math.cos(cameraEularAngles[1]) + Math.sin(cameraEularAngles[2]) * Math.sin(cameraEularAngles[1]), 0],
-			// 	[Math.sin(cameraEularAngles[2]) * Math.cos(cameraEularAngles[0]), Math.sin(cameraEularAngles[2]) * Math.sin(cameraEularAngles[0]) * Math.sin(cameraEularAngles[1]) + Math.cos(cameraEularAngles[2]) * Math.cos(cameraEularAngles[1]), Math.sin(cameraEularAngles[2]) * Math.sin(cameraEularAngles[0]) * Math.cos(cameraEularAngles[1]) - Math.cos(cameraEularAngles[2]) * Math.sin(cameraEularAngles[1]), 0],
-			// 	[-Math.sin(cameraEularAngles[0]), Math.cos(cameraEularAngles[0]) * Math.sin(cameraEularAngles[1]), Math.cos(cameraEularAngles[0]) * Math.cos(cameraEularAngles[1]), 0],
-			// 	[0, 0, 0, 1]];
-
-			// x ↔ y
-			// var angleMatrix = [
-			// 	[Math.cos(cameraEularAngles[2]) * Math.cos(cameraEularAngles[1]), Math.cos(cameraEularAngles[2]) * Math.sin(cameraEularAngles[1]) * Math.sin(cameraEularAngles[0]) - Math.sin(cameraEularAngles[2]) * Math.cos(cameraEularAngles[0]), Math.cos(cameraEularAngles[2]) * Math.sin(cameraEularAngles[1]) * Math.cos(cameraEularAngles[0]) + Math.sin(cameraEularAngles[2]) * Math.sin(cameraEularAngles[0]), 0],
-			// 	[Math.sin(cameraEularAngles[2]) * Math.cos(cameraEularAngles[1]), Math.sin(cameraEularAngles[2]) * Math.sin(cameraEularAngles[1]) * Math.sin(cameraEularAngles[0]) + Math.cos(cameraEularAngles[2]) * Math.cos(cameraEularAngles[0]), Math.sin(cameraEularAngles[2]) * Math.sin(cameraEularAngles[1]) * Math.cos(cameraEularAngles[0]) - Math.cos(cameraEularAngles[2]) * Math.sin(cameraEularAngles[0]), 0],
-			// 	[-Math.sin(cameraEularAngles[1]), Math.cos(cameraEularAngles[1]) * Math.sin(cameraEularAngles[0]), Math.cos(cameraEularAngles[1]) * Math.cos(cameraEularAngles[0]), 0],
-		// 	// 	[0, 0, 0, 1]];
-
-		// 	var gravityVector = matrixMultiplication(angleMatrix, lastGravityVector);
-		// 	gravityVector.forEach(function(v, i){
-		// 		v.forEach(function(w, j){
-		// 			switch(j){
-		// 				case 0:
-		// 					w *= 1;
-		// 					break;
-		// 				case 1:
-		// 					w *= 1;
-		// 					break;
-		// 				case 2:
-		// 					w *= 1;
-		// 					break;
-		// 				case 3:
-		// 					break;
-		// 			}
-		// 		})
-		// 	});
-
-		// 	// console.log(gravityVector[0][0], gravityVector[1][0], gravityVector[2][0]);
-			world.gravity.set(d.X,d.Y,d.Z);
-		// 	gr("#main")("#gravityDisplay").setAttribute("position", gravityVector[0][0] / 9.82 + "," + gravityVector[1][0] / 9.82 + "," + gravityVector[2][0] / 9.82);
-
-		// 	lastGravityVector = gravityVector;
-		// 	lastCameraEularAngles = cameraEularAngles;
-		// }else{
-		// 	console.log("おやすみ！");
-		// 	lastCameraEularAngles = cameraEularAngles;
-		// }
+		world.gravity.set(d.X,d.Y,d.Z);
 	}
 		requestAnimationFrame(physics);
 	}

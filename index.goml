@@ -14,7 +14,5 @@
         <mesh id="sphere2" geometry="sphere" color="#0000FF" targetBuffer="wireframe" scale="1,1,1" position="0,0,3" rotation="0,0,0"></mesh>
 
         <!-- <mesh id="cylinder" geometry="cylinder" color="#000000" scale="0.1,1,0.1" position="0,0,0" rotation="0,0,0" targetBuffer="wireframe"></mesh> -->
-        <mesh id="origin" geometry="sphere" color="#000000" scale="0.2,0.2,0.2" position="0,0,0" rotation="0,0,0"></mesh>
-        <mesh id="gravityDisplay" geometry="sphere" color="#FF0000" scale="0.2,0.2,0.2" position="0,0,0" rotation="0,0,0"></mesh>
     </scene>
 </goml>
