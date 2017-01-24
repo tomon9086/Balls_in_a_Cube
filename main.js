@@ -109,6 +109,7 @@ gr(function(){
 			// 	[-Math.sin(cameraEularAngles[0]) * Math.cos(cameraEularAngles[2]), Math.sin(cameraEularAngles[0]) * Math.sin(cameraEularAngles[2]), Math.cos(cameraEularAngles[0]), 0],
 			// 	[0, 0, 0, 1]];
 
+
 			// =========== RollPitchYoe ===========
 			// var angleMatrix = [
 			// 	[Math.cos(cameraEularAngles[2]) * Math.cos(cameraEularAngles[0]), Math.cos(cameraEularAngles[2]) * Math.sin(cameraEularAngles[0]) * Math.sin(cameraEularAngles[1]) - Math.sin(cameraEularAngles[2]) * Math.cos(cameraEularAngles[1]), Math.cos(cameraEularAngles[2]) * Math.sin(cameraEularAngles[0]) * Math.cos(cameraEularAngles[1]) + Math.sin(cameraEularAngles[2]) * Math.sin(cameraEularAngles[1]), 0],
@@ -156,36 +157,3 @@ gr(function(){
 		requestAnimationFrame(physics);
 	}
 });
-
-function matrixMultiplication(matrixA, matrixB){
-	if(matrixA[0].length !== matrixB.length){
-		alert("Matrix Multiplication can't be defined.");
-		return [];
-	}
-	var result = [];
-	for(var k = 0; k < matrixA.length; k++){
-		result.push([]);
-		for(var l = 0; l < matrixB[0].length; l++){
-			result[k].push(0);
-		}
-	}
-	if(result.length === 1 && result[0].length === 1){
-		var result = 0;
-		matrixA.forEach(function(v, i){
-			v.forEach(function(w, j){
-				result += Number(w) * Number(matrixB[j][i]);
-				// console.log(w, "*", matrixB[j][i]);
-			});
-		});
-	}else{
-		for(var i = 0; i < matrixA.length; i++){
-			for(var j = 0; j < matrixB[0].length; j++){
-				matrixA[i].forEach(function(x, m){
-					result[i][j] += x * matrixB[m][j];
-					// console.log(i, j, "=", x, "*", matrixB[m][j]);
-				});
-			}
-		}
-	}
-	return result;
-}
