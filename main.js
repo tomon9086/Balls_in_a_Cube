@@ -89,7 +89,6 @@ gr(function(){
 		var t =camera.getComponent("Transform");
 		var d = t.up.negateThis().multiplyWith(9.82);
 		world.gravity.set(d.X,d.Y,d.Z);
-	}
 		requestAnimationFrame(physics);
 	}
 });
